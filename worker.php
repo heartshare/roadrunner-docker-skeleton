@@ -16,12 +16,7 @@ $app = \Slim\Factory\AppFactory::create($psr17Factory, $container);
 
 // define routes
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
-    $response->getBody()->write('Hello, from RoadRunner and Slim!');
-    return $response;
-});
-
-$app->get('/{name}', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
-    $response->getBody()->write('Hello, ' . $args['name'] ?? 'RoadRunner');
+    $response->getBody()->write('Hello world from RoadRunner and Slim!');
     return $response;
 });
 
