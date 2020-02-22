@@ -14,12 +14,18 @@ $psr17Factory = new Nyholm\Psr7\Factory\Psr17Factory();
 $container = new \DI\Container();
 $app = \Slim\Factory\AppFactory::create($psr17Factory, $container);
 
-$app->get('/hello/{name}', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
-    $response->getBody()->write('Hello, ' . $args['name']);
+// define routes
+$app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
+    $response->getBody()->write('Hello, from RoadRunner and Slim!');
     return $response;
 });
 
-// routing error handling
+$app->get('/{name}', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
+    $response->getBody()->write('Hello, ' . $args['name'] ?? 'RoadRunner');
+    return $response;
+});
+
+// set routing error handling
 $app->addMiddleware(new class($psr17Factory) implements MiddlewareInterface {
 
     private $responseFactory;
