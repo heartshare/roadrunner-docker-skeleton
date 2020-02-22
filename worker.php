@@ -39,11 +39,11 @@ $app->addMiddleware(new class($psr17Factory) implements MiddlewareInterface {
         try {
             return $next->handle($request);
         } catch (\Slim\Exception\HttpNotFoundException $e) {
-            $response = $this->responseFactory->createResponse();
+            $response = $this->responseFactory->createResponse(404);
             $response->getBody()->write('route not found');
             return $response;
         } catch (\Slim\Exception\HttpMethodNotAllowedException $e) {
-            $response = $this->responseFactory->createResponse();
+            $response = $this->responseFactory->createResponse(405);
             $response->getBody()->write('method not allowed');
             return $response;
         }
