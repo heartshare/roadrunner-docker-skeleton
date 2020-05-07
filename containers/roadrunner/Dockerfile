@@ -3,9 +3,7 @@ FROM php:7.3-cli
 RUN apt-get update && apt-get install -y --no-install-recommends \
   vim \
   libzip-dev \
-  unzip \
-  procps \
-  inotify-tools
+  unzip
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
@@ -20,7 +18,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && mv composer.phar /usr/local/bin/composer
 
 # Download RoadRunner
-ENV RR_VERSION 1.6.1
+ENV RR_VERSION 1.8.0
 RUN mkdir /tmp/rr \
   && cd /tmp/rr \
   && echo "{\"require\":{\"spiral/roadrunner\":\"${RR_VERSION}\"}}" >> composer.json \
